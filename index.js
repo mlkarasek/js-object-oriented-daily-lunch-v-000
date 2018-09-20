@@ -13,3 +13,15 @@ const Neighborhood = (() => {
      customers() {
        return store.customers.filter(customer => customer.neighborhoodId === this.id);
      }
+
+     meals() {
+       const allMeals = this.customers().map(customer => customer.meals());
+       const merged = [].concat.apply([], allMeals);
+       return [...new Set(merged)];
+     }
+
+     deliveries() {
+       return store.deliveries.filter(delivery => delivery.neighborhoodId === this.id);
+     }
+   };
+ })();
